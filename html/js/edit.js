@@ -2,6 +2,14 @@
  * Created by ced on 05/04/2021.
  */
 
+Vue.component('base-img', {
+    data: function () {
+        return {
+            count: 0
+        }
+    },
+    template: '<img src="pics/ImperialBase_sticker.png">'
+})
 
 // L'objet est ajouté à une instance de Vue
 var vm = new Vue({
@@ -11,7 +19,7 @@ var vm = new Vue({
         onclick: function (event) {
             console.log(event);
             console.log(this.tokens);
-            this.tokens = [{'id': 'foo'}]
+            this.tokens.push({id: 'foo'})
         }
     }
 })
