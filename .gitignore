@@ -1,3 +1,6 @@
+.idea
+*.sqlite3
+
 *.gem
 *.rbc
 /.config
