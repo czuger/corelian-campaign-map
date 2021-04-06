@@ -20,18 +20,12 @@ Vue.component('base-img', {
 
                     break;
                 case 2:
-                    this.pic_path =  'pics/RebelPresence_sticker.png';
+                    this.pic_path =  'pics/PresenceDestroyed_sticker.png';
                     this.pic_status =  3;
 
                     break;
 
                 case 3:
-                    this.pic_path =  'pics/PresenceDestroyed_sticker.png';
-                    this.pic_status =  4;
-
-                    break;
-
-                case 4:
                     Vue.delete(vm.tokens, this.index)
 
                     break;
