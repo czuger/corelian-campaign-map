@@ -9,7 +9,7 @@ Vue.component('base-img', {
             pic_status: 1
         }
     },
-    props: ['pos'],
+    props: ['pos', 'index'],
     template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status">',
     methods: {
         change_status: function (event) {
@@ -27,8 +27,15 @@ Vue.component('base-img', {
 
                 case 3:
                     this.pic_path =  'pics/PresenceDestroyed_sticker.png';
+                    this.pic_status =  4;
 
                     break;
+
+                case 4:
+                    Vue.delete(vm.tokens, this.index)
+
+                    break;
+
 
                 default:
                     console.log(`Unknown pic status ${this.pic_status}`);
