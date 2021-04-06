@@ -8,8 +8,11 @@ Vue.component('base-img', {
             count: 0
         }
     },
-    template: '<img src="pics/ImperialBase_sticker.png">'
+    props: ['pos'],
+    template: '<img class="base-class" src="pics/ImperialBase_sticker.png" :style="pos">'
 })
+
+
 
 // L'objet est ajouté à une instance de Vue
 var vm = new Vue({
@@ -19,7 +22,12 @@ var vm = new Vue({
         onclick: function (event) {
             console.log(event);
             console.log(this.tokens);
-            this.tokens.push({id: 'foo'})
+            // console.log(event.clientX, event.clientY);
+            var x = event.offsetX;
+            var y = event.offsetY;
+            var style = 'top:' + (y - 21) + 'px;left:' + (x - 21) + 'px';
+            console.log(style);
+            this.tokens.push({pos: style })
         }
     }
 })
