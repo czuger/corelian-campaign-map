@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_04_04_142255) do
   create_table "tokens", force: :cascade do |t|
     t.string "location"
     t.integer "status", limit: 1
+    t.index ["location"], name: "index_tokens_on_location", unique: true
   end
 
 end

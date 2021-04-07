@@ -9,8 +9,8 @@ Vue.component('base-img', {
             pic_status: 1
         }
     },
-    props: ['pos', 'index'],
-    template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status">',
+    props: ['pos', 'index', 'area'],
+    template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status" :area="area">',
     methods: {
         change_status: function (event) {
             switch (this.pic_status) {
@@ -34,6 +34,9 @@ Vue.component('base-img', {
                 default:
                     console.log(`Unknown pic status ${this.pic_status}`);
             }
+
+            $.post( "http://localhost:4567/modify_position",
+                { location: this.area, status: this.pic_status } );
         }
     }
 })
@@ -58,7 +61,7 @@ var vm = new Vue({
             }
 
             // console.log(style);
-            this.tokens.push({pos: style})
+            this.tokens.push({pos: style, area: area_data[0]})
 
             if(area_data)
             {

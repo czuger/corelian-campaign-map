@@ -6,7 +6,7 @@ require 'sinatra/cors'
 require_relative 'models/token'
 
 set :allow_origin, '*'
-set :allow_methods, 'GET,HEAD,POST'
+set :allow_methods, 'GET,HEAD,POST,OPTIONS'
 set :allow_headers, 'content-type,if-modified-since'
 set :expose_headers, 'location,link'
 
@@ -20,5 +20,21 @@ post '/add_position' do
   location = params['location']
   status = params['status']
 
-  Token.create!(location: location, status: status)
+  token = Token.where(location: location).first_or_initialize{ |t|
+    t.status = status
+  }
+  token.save!
+
 end
+
+post '/modify_position' do
+  location = params['location']
+  status = params['status']
+
+  p location
+
+  token = Token.where(location: location).take
+  token.status = status
+  token.save!
+end
+
