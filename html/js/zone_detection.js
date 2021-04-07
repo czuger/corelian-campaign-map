@@ -4,7 +4,11 @@
 
 const areas = [
     { top: 299, left: 375, zone: 'froz' },
-    { top: 485, left: 424, zone: 'selonia' }
+    { top: 485, left: 424, zone: 'selonia' },
+    { top: 692, left: 152, zone: 'crash_drift' },
+    { top: 524, left: 630, zone: 'drall' },
+    { top: 417, left: 885, zone: 'polanis' },
+    { top: 622, left: 575, zone: 'corellia' }
 ];
 
 const top_area_decal = 25;

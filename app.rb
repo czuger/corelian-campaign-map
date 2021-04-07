@@ -1,14 +1,24 @@
 # app.rb
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sinatra/cors'
 
 require_relative 'models/token'
 
-# Use https://github.com/cjheath/sinatra_omniauth/tree/master/models
-# For login
+set :allow_origin, '*'
+set :allow_methods, 'GET,HEAD,POST'
+set :allow_headers, 'content-type,if-modified-since'
+set :expose_headers, 'location,link'
 
 set :database, {adapter: 'sqlite3', database: 'db/dev.sqlite3'}
 
+# routes...
 get '/' do
-  Token.create( pic_name: :foo, location: :bar )
+end
+
+post '/add_position' do
+  location = params['location']
+  status = params['status']
+
+  Token.create!(location: location, status: status)
 end

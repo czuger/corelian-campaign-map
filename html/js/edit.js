@@ -46,12 +46,25 @@ var vm = new Vue({
         onclick: function (event) {
             const area_data = get_area(event.offsetX, event.offsetY);
 
-            const y = area_data[1];
-            const x = area_data[2];
+            if(area_data){
+                const y = area_data[1];
+                const x = area_data[2];
+                var style = 'top:' + (y) + 'px;left:' + (x) + 'px';
+            }
+            else{
+                const x = event.offsetX;
+                const y = event.offsetY;
+                var style = 'top:' + (y - 21) + 'px;left:' + (x - 21) + 'px';
+            }
 
-            var style = 'top:' + (y) + 'px;left:' + (x) + 'px';
             // console.log(style);
             this.tokens.push({pos: style})
+
+            if(area_data)
+            {
+                $.post( "http://localhost:4567/add_position", { location: area_data[0], status: 1 } );
+            }
+
         }
     }
 })

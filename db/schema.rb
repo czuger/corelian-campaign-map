@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2021_04_04_142255) do
 
   create_table "tokens", force: :cascade do |t|
-    t.string "pic_name"
     t.string "location"
+    t.integer "status", limit: 1
   end
 
 end
