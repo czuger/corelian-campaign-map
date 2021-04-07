@@ -10,7 +10,7 @@ Vue.component('base-img', {
         }
     },
     props: ['pos', 'index', 'area'],
-    template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status" :area="area">',
+    template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status">',
     methods: {
         change_status: function (event) {
             switch (this.pic_status) {
