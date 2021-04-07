@@ -44,12 +44,12 @@ var vm = new Vue({
     data: { tokens: [] },
     methods: {
         onclick: function (event) {
-            // console.log(event);
-            // console.log(this.tokens);
-            // console.log(event.clientX, event.clientY);
-            var x = event.offsetX;
-            var y = event.offsetY;
-            var style = 'top:' + (y - 21) + 'px;left:' + (x - 21) + 'px';
+            const area_data = get_area(event.offsetX, event.offsetY);
+
+            const y = area_data[1];
+            const x = area_data[2];
+
+            var style = 'top:' + (y) + 'px;left:' + (x) + 'px';
             // console.log(style);
             this.tokens.push({pos: style})
         }
