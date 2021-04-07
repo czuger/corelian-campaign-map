@@ -15,21 +15,23 @@ Vue.component('base-img', {
         change_status: function (event) {
             switch (this.pic_status) {
                 case 1:
-                    this.pic_path =  'pics/RebelPresence_sticker.png';
-                    this.pic_status =  2;
-
+                    this.pic_path =  'pics/RebelBase_sticker.png';
+                    this.pic_status += 1;
                     break;
-                case 2:
-                    this.pic_path =  'pics/PresenceDestroyed_sticker.png';
-                    this.pic_status =  3;
 
+                case 2:
+                    this.pic_path =  'pics/RebelOutpost_sticker.png';
+                    this.pic_status += 1;
                     break;
 
                 case 3:
-                    Vue.delete(vm.tokens, this.index)
-
+                    this.pic_path =  'pics/PresenceDestroyed_sticker.png';
+                    this.pic_status += 1;
                     break;
 
+                case 4:
+                    Vue.delete(vm.tokens, this.index)
+                    break;
 
                 default:
                     console.log(`Unknown pic status ${this.pic_status}`);
@@ -47,7 +49,7 @@ var vm = new Vue({
     data: { tokens: [] },
     methods: {
         onclick: function (event) {
-            const area_data = get_area(event.offsetX, event.offsetY);
+            var area_data = get_area(event.offsetX, event.offsetY);
 
             if(area_data){
                 const y = area_data[1];
@@ -58,6 +60,7 @@ var vm = new Vue({
                 const x = event.offsetX;
                 const y = event.offsetY;
                 var style = 'top:' + (y - 21) + 'px;left:' + (x - 21) + 'px';
+                area_data = []
             }
 
             // console.log(style);
