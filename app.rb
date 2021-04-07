@@ -25,7 +25,7 @@ post '/add_position' do
   status = params['status']
 
   token = Token.where(location: location).first_or_initialize{ |t|
-    t.status = status
+    t.status = 1
   }
   token.save!
 
@@ -40,4 +40,13 @@ post '/modify_position' do
   token = Token.where(location: location).take
   token.status = status
   token.save!
+end
+
+post '/delete_position' do
+  location = params['location']
+  status = params['status']
+
+  p location
+
+  Token.where(location: location).delete_all
 end

@@ -15,10 +15,13 @@ Vue.component('base-img', {
 
                 if (this.pic_status >= 5) {
                     Vue.delete(vm.tokens, this.index)
+                    $.post("http://localhost:4567/delete_position",
+                        {location: this.area, status: this.pic_status});
+                }else
+                {
+                    $.post("http://localhost:4567/modify_position",
+                        {location: this.area, status: this.pic_status});
                 }
-
-                $.post("http://localhost:4567/modify_position",
-                    {location: this.area, status: this.pic_status});
             }
         }
     },
