@@ -6,18 +6,20 @@ Vue.component('base-img', {
     data: function () {
         return { pic_status: null }
     },
-    props: ['pos', 'index', 'area', 'pic_status_init'],
+    props: ['pos', 'index', 'area', 'pic_status_init', 'imperial_view'],
     template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status">',
     methods: {
         change_status: function (event) {
-            this.pic_status += 1;
+            if(this.imperial_view != 'true'){
+                this.pic_status += 1;
 
-            if (this.pic_status >= 5) {
-                Vue.delete(vm.tokens, this.index)
+                if (this.pic_status >= 5) {
+                    Vue.delete(vm.tokens, this.index)
+                }
+
+                $.post("http://localhost:4567/modify_position",
+                    {location: this.area, status: this.pic_status});
             }
-
-            $.post("http://localhost:4567/modify_position",
-                {location: this.area, status: this.pic_status});
         }
     },
     computed: {
@@ -28,11 +30,21 @@ Vue.component('base-img', {
                     break;
 
                 case 2:
-                    return 'pics/RebelBase_sticker.png';
+                    if(this.imperial_view == 'true'){
+                        return 'pics/RebelPresence_sticker.png';
+                    }else{
+                        return 'pics/RebelBase_sticker.png';
+                    }
+
                     break;
 
                 case 3:
-                    return 'pics/RebelOutpost_sticker.png';
+                    if(this.imperial_view == 'true'){
+                        return 'pics/RebelPresence_sticker.png';
+                    }else{
+                        return 'pics/RebelOutpost_sticker.png';
+                    }
+
                     break;
 
                 case 4:
