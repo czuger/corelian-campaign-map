@@ -2,6 +2,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/cors'
+require 'json'
 
 require_relative 'models/token'
 
@@ -14,7 +15,10 @@ set :database, {adapter: 'sqlite3', database: 'db/dev.sqlite3'}
 
 # routes...
 get '/' do
+  tokens = Token.all
+  tokens.to_a.to_json
 end
+
 
 post '/add_position' do
   location = params['location']
@@ -37,4 +41,3 @@ post '/modify_position' do
   token.status = status
   token.save!
 end
-

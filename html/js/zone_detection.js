@@ -30,3 +30,13 @@ function get_area(x, y){
         }
     }
 }
+
+function read_area(_area, status){
+
+    for (const area of areas){
+        if(area.zone === _area){
+            style = 'top:' + (area.top) + 'px;left:' + (area.left) + 'px';
+            return {pos: style, area: _area, status: status};
+        }
+    }
+}
