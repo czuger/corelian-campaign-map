@@ -12,6 +12,7 @@ set :allow_headers, 'content-type,if-modified-since'
 set :expose_headers, 'location,link'
 
 set :database, {adapter: 'sqlite3', database: 'db/dev.sqlite3'}
+set :port, 6482
 
 # routes...
 get '/' do
