@@ -2,6 +2,8 @@
  * Created by ced on 05/04/2021.
  */
 
+var imperial_view = null;
+
 Vue.component('base-img', {
     data: function () {
         return { pic_status: null }
@@ -10,10 +12,10 @@ Vue.component('base-img', {
     template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status">',
     methods: {
         change_status: function (event) {
-            if(this.imperial_view != 'true'){
+            if(!imperial_view){
                 this.pic_status += 1;
 
-                console.log(this._uid, this.pic_status);
+                // console.log(this._uid, this.pic_status);
 
                 if (this.pic_status >= 5) {
                     // Vue.delete(vm.tokens, this.index);
@@ -35,7 +37,7 @@ Vue.component('base-img', {
                     break;
 
                 case 2:
-                    if(this.imperial_view == 'true'){
+                    if(imperial_view == 'true'){
                         return 'pics/RebelPresence_sticker.png';
                     }else{
                         return 'pics/RebelBase_sticker.png';
@@ -44,7 +46,7 @@ Vue.component('base-img', {
                     break;
 
                 case 3:
-                    if(this.imperial_view == 'true'){
+                    if(imperial_view == 'true'){
                         return 'pics/RebelPresence_sticker.png';
                     }else{
                         return 'pics/RebelOutpost_sticker.png';
@@ -71,54 +73,51 @@ var vm = new Vue({
     el: '#main',
     data: { tokens: [] },
     mounted: function () {
-        console.log(make_host('/'));
+        // console.log(make_host('/'));
 
         axios
             .get(make_host('/'))
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
 
                 for (const d of response.data){
-                    console.log(d);
+                    // console.log(d);
                     var a = read_area(d.location, d.status);
-                    console.log(a);
+                    // console.log(a);
                     this.tokens.push(a);
                 }
             }
         )
     },
+    created: function () {
+        imperial_view = get_url_parameter('imperial');
+    },
     methods: {
         onclick: function (event) {
-            var area_data = get_area(event.offsetX, event.offsetY);
-
-            if(area_data){
-                const y = area_data[1];
-                const x = area_data[2];
-                var style = 'top:' + (y) + 'px;left:' + (x) + 'px';
-            }
-            else{
-                const x = event.offsetX;
-                const y = event.offsetY;
-                var style = 'top:' + (y - 21) + 'px;left:' + (x - 21) + 'px';
-                area_data = []
-            }
-
-            // console.log(style);
-            this.tokens.push({pos: style, area: area_data[0], status: 1})
-
-            if(area_data)
+            if(!imperial_view)
             {
-                $.post( make_host('/add_position'), { location: area_data[0], status: 1 } );
-            }
+                var area_data = get_area(event.offsetX, event.offsetY);
 
+                if(area_data){
+                    const y = area_data[1];
+                    const x = area_data[2];
+                    var style = 'top:' + (y) + 'px;left:' + (x) + 'px';
+                }
+                else{
+                    const x = event.offsetX;
+                    const y = event.offsetY;
+                    var style = 'top:' + (y - 21) + 'px;left:' + (x - 21) + 'px';
+                    area_data = [];
+                }
+
+                // console.log(style);
+                this.tokens.push({pos: style, area: area_data[0], status: 1})
+
+                if(area_data)
+                {
+                    $.post( make_host('/add_position'), { location: area_data[0], status: 1 } );
+                }
+            }
         }
     }
-})
-
-$(document).ready(function() {
-    // $( "#main" ).click(function(event) {
-    //     console.log(event.pageX, event.pageY);
-    //     console.log(vm.data);
-    //     // vm.data.tokens.appenc({'id': 'foo'})
-    // });
 });
