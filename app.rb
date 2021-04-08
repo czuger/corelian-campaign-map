@@ -11,8 +11,11 @@ set :allow_methods, 'GET,HEAD,POST,OPTIONS'
 set :allow_headers, 'content-type,if-modified-since'
 set :expose_headers, 'location,link'
 
-set :database, {adapter: 'sqlite3', database: 'db/dev.sqlite3'}
-set :port, 6482
+settings = File.read('settings.json')
+settings = JSON.parse(settings)
+
+set :database, {adapter: 'sqlite3', database: settings['db']}
+set :port, settings['port']
 
 # routes...
 get '/' do
