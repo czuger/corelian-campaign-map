@@ -13,8 +13,10 @@ Vue.component('base-img', {
             if(this.imperial_view != 'true'){
                 this.pic_status += 1;
 
+                console.log(this._uid, this.pic_status);
+
                 if (this.pic_status >= 5) {
-                    Vue.delete(vm.tokens, this.index)
+                    // Vue.delete(vm.tokens, this.index);
                     $.post("http://localhost:4567/delete_position",
                         {location: this.area, status: this.pic_status});
                 }else
