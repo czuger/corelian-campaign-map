@@ -23,7 +23,6 @@ get '/' do
   tokens.to_a.to_json
 end
 
-
 post '/add_position' do
   location = params['location']
   status = params['status']
@@ -39,7 +38,7 @@ post '/modify_position' do
   location = params['location']
   status = params['status']
 
-  p location
+  # p location
 
   token = Token.where(location: location).take
   token.status = status
@@ -48,9 +47,9 @@ end
 
 post '/delete_position' do
   location = params['location']
-  status = params['status']
+  # status = params['status']
 
-  p location
+  # p location
 
   Token.where(location: location).delete_all
 end

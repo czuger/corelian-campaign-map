@@ -17,11 +17,11 @@ Vue.component('base-img', {
 
                 if (this.pic_status >= 5) {
                     // Vue.delete(vm.tokens, this.index);
-                    $.post("http://localhost:4567/delete_position",
+                    $.post(make_host('/delete_position'),
                         {location: this.area, status: this.pic_status});
                 }else
                 {
-                    $.post("http://localhost:4567/modify_position",
+                    $.post(make_host('/modify_position'),
                         {location: this.area, status: this.pic_status});
                 }
             }
@@ -71,8 +71,10 @@ var vm = new Vue({
     el: '#main',
     data: { tokens: [] },
     mounted: function () {
+        console.log(make_host('/'));
+
         axios
-            .get('http://localhost:4567/')
+            .get(make_host('/'))
             .then(response => {
                 console.log(response.data);
 
@@ -106,7 +108,7 @@ var vm = new Vue({
 
             if(area_data)
             {
-                $.post( "http://localhost:4567/add_position", { location: area_data[0], status: 1 } );
+                $.post( make_host('/add_position'), { location: area_data[0], status: 1 } );
             }
 
         }

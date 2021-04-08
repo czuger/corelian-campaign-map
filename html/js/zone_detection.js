@@ -8,7 +8,10 @@ const areas = [
     { top: 692, left: 152, zone: 'crash_drift' },
     { top: 524, left: 630, zone: 'drall' },
     { top: 417, left: 885, zone: 'polanis' },
-    { top: 622, left: 575, zone: 'corellia' }
+    { top: 622, left: 575, zone: 'corellia' },
+    { top: 118, left: 800, zone: 'phemis' },
+    { top: 681, left: 384, zone: 'talus' },
+    { top: 846, left: 471, zone: 'tralus' },
 ];
 
 const top_area_decal = 25;
