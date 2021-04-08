@@ -1,0 +1,4 @@
+{
+    "db": "foo.sqlite3",
+    "port": 666
+}
