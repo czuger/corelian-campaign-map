@@ -13,6 +13,12 @@ const areas = [
     { top: 681, left: 384, zone: 'talus', construction: 8, skilled_spacers: true },
     { top: 846, left: 471, zone: 'tralus', construction: 8, skilled_spacers: true },
     { top: 761, left: 625, zone: 'centerpoint', construction: 5, sypnets: true },
+    { top: 858, left: 763, zone: 'aurea', construction: 9, diplomats: true },
+    { top: 937, left: 302, zone: 'saberhing', construction: 16, repair_yards: true },
+    { top: 1039, left: 712, zone: 'sacorria', construction: 10 },
+    { top: 635, left: 954, zone: 'raiders_point', construction: 4, sypnets: true },
+    { top: 1055, left: 991, zone: 'vagran', construction: 8, repair_yards: true },
+    { top: 921, left: 1079, zone: 'plympto', construction: 1, skilled_spacers: true },
 ];
 
 const top_area_decal = 25;
