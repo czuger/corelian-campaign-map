@@ -78,12 +78,12 @@ var vm = new Vue({
         axios
             .get(make_host('/'))
             .then(response => {
-                // console.log(response.data);
+                console.log(response.data);
 
                 for (const d of response.data){
-                    // console.log(d);
-                    var a = read_area(d.location, d.status);
-                    // console.log(a);
+                    console.log(d);
+                    var a = read_area(d);
+                    console.log(a);
                     this.tokens.push(a);
                 }
             }
