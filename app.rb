@@ -23,6 +23,16 @@ get '/' do
   tokens.to_a.to_json
 end
 
+get '/imperial' do
+  tokens = Token.where(status: 1)
+  tokens.to_a.to_json
+end
+
+get '/rebels' do
+  tokens = Token.where(status: [2, 3])
+  tokens.to_a.to_json
+end
+
 post '/add_position' do
   location = params['location']
   status = params['status']
