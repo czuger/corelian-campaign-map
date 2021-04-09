@@ -6,7 +6,7 @@
 // L'objet est ajouté à une instance de Vue
 var vm = new Vue({
     el: '#status',
-    data: { bases: [], base_total: 0, area_total: 0, repair: 30 },
+    data: { bases: [] },
     mounted: function () {
         // console.log(make_host('/'));
 
@@ -25,6 +25,63 @@ var vm = new Vue({
                     }
                 }
             )
+    },
+    computed: {
+        total_base: function(){
+            let cumul = 0;
+
+            for(base of this.bases){
+                cumul += this.status_base_points(base.status)
+            }
+
+            return cumul;
+        },
+        total_location: function(){
+            let cumul = 0;
+
+            for(base of this.bases){
+                cumul += base.construction;
+            }
+
+            return cumul;
+        },
+        total_repair: function(){
+            let cumul = 0;
+
+            for(base of this.bases){
+                cumul += base.repair_yards;
+            }
+
+            return cumul;
+        },
+        total_diplomats: function(){
+            let cumul = 0;
+
+            for(base of this.bases){
+                cumul += base.diplomats;
+            }
+
+            return cumul;
+        },
+        total_spynets: function(){
+            let cumul = 0;
+
+            for(base of this.bases){
+                cumul += base.spynets;
+            }
+
+            return cumul;
+        },
+        total_skilled_spacers: function(){
+            let cumul = 0;
+
+            for(base of this.bases){
+                cumul += base.skilled_spacers;
+            }
+
+            return cumul;
+        }
+
     },
     methods: {
         status_name: function(status){
@@ -56,11 +113,6 @@ var vm = new Vue({
                 default:
                     return 0;
             }
-        },
-        cumul_method: function(base_status, location_points, repair_points){
-            this.base_total += this.status_base_points(base_status);
-            this.area_total += location_points;
-            this.repair += repair_points;
         }
     }
 });

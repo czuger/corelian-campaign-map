@@ -13,16 +13,32 @@
             <thead>
                 <tr>
                     <th>Lieu</th><th>Type</th><th>Points base</th><th>Points lieu</th><th>Réparation</th>
+                    <th>Diplomats</th><th>Spynets</th><th>Skilled spacers</th>
                 </tr>
             </thead>
 
 
             <tbody>
                 <tr v-for="base in bases" :key="base.id">
-                    <td>{{ base.area }}</td><td>{{ status_name(base.status) }}</td>
+                    <td>{{ base.area.charAt(0).toUpperCase() + base.area.slice(1)  }}</td><td>{{ status_name(base.status) }}</td>
                     <td>{{ status_base_points(base.status) }}</td><td>{{ base.construction }}</td>
-                    <td>{{ base.repair_yards }}</td>
+                    <td>{{ base.repair_yards }}</td><td>{{ base.diplomats }}</td><td>{{ base.spynets }}</td>
+                    <td>{{ base.skilled_spacers }}</td>
                 </tr>
+                <tr class="table-secondary">
+                    <td colspan="2">Total détaillé</td>
+                    <td>{{ total_base }}</td><td>{{ total_location }}</td>
+                    <td>{{ total_repair }}</td><td colspan="3"></td>
+                </tr>
+                <tr class="table-warning">
+                    <td colspan="3">Total final</td>
+                    <td>{{ total_base + total_location }}</td>
+                    <td>{{ 30 + total_repair }}</td>
+                    <td>{{ total_diplomats }}</td>
+                    <td>{{ total_spynets }}</td>
+                    <td>{{ total_skilled_spacers }}</td>
+                </tr>
+
             </tbody>
         </table>
     </div>

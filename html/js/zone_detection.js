@@ -3,16 +3,16 @@
  */
 
 const areas = [
-    { top: 299, left: 375, zone: 'froz', construction: 0 },
+    { top: 299, left: 375, zone: 'froz', construction: 0, diplomats: true },
     { top: 485, left: 424, zone: 'selonia', construction: 12, repair_yards: true },
-    { top: 692, left: 152, zone: 'crash_drift', construction: 13 },
-    { top: 524, left: 630, zone: 'drall', construction: 9 },
+    { top: 692, left: 152, zone: 'crash_drift', construction: 13, skilled_spacers: true },
+    { top: 524, left: 630, zone: 'drall', construction: 9, diplomats: true },
     { top: 417, left: 885, zone: 'polanis', construction: 15 },
     { top: 622, left: 575, zone: 'corellia', construction: 20, repair_yards: true },
     { top: 118, left: 800, zone: 'phemis', construction: 2 },
-    { top: 681, left: 384, zone: 'talus', construction: 8 },
-    { top: 846, left: 471, zone: 'tralus', construction: 8 },
-    { top: 761, left: 625, zone: 'centerpoint', construction: 5 },
+    { top: 681, left: 384, zone: 'talus', construction: 8, skilled_spacers: true },
+    { top: 846, left: 471, zone: 'tralus', construction: 8, skilled_spacers: true },
+    { top: 761, left: 625, zone: 'centerpoint', construction: 5, sypnets: true },
 ];
 
 const top_area_decal = 25;
@@ -42,7 +42,10 @@ function read_area(_data){
             style = 'top:' + (area.top) + 'px;left:' + (area.left) + 'px';
             return {pos: style, area: _data.location, status: _data.status, construction: area.construction,
                 db_id: _data.id, id: _data.id,
-                repair_yards: (area.repair_yards ? 5 : 0)
+                repair_yards: (area.repair_yards ? 5 : 0),
+                diplomats: (area.diplomats ? 1 : 0),
+                spynets: (area.spynets ? 1 : 0),
+                skilled_spacers: (area.skilled_spacers ? 1 : 0)
             };
         }
     }
