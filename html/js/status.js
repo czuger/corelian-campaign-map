@@ -26,6 +26,17 @@ var vm = new Vue({
                 }
             )
     },
+    updated: function () {
+        this.$nextTick(function () {
+            // Code that will run only after the
+            // entire view has been re-rendered
+
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        })
+    },
     computed: {
         total_base: function(){
             let cumul = 0;
@@ -84,6 +95,15 @@ var vm = new Vue({
 
     },
     methods: {
+        base_points_details: function(base){
+            // console.log(base);
+            return this.status_base_points(base.status).toString() + ' + ' + base.construction.toString();
+        },
+        repair_total_detail: function(){
+            // console.log(base);
+            let thirty = 30;
+            return thirty.toString() + ' + ' + this.total_repair.toString();
+        },
         status_name: function(status){
             switch (status) {
                 case 1:
@@ -116,3 +136,6 @@ var vm = new Vue({
         }
     }
 });
+
+$(function () {
+})
