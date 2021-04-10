@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_064259) do
+ActiveRecord::Schema.define(version: 2021_04_10_195816) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 2021_04_10_064259) do
     t.string "location", null: false
     t.integer "status", limit: 1, null: false
     t.integer "campaign_id", null: false
+    t.index ["campaign_id", "location"], name: "index_tokens_on_campaign_id_and_location", unique: true
     t.index ["campaign_id"], name: "index_tokens_on_campaign_id"
-    t.index ["location"], name: "index_tokens_on_location", unique: true
   end
 
   add_foreign_key "tokens", "campaigns"

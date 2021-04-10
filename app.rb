@@ -108,15 +108,15 @@ end
 get '/list_campaigns' do
   result = []
   host = settings['host']
-  random = SecureRandom.alphanumeric(12)
+  # random = SecureRandom.alphanumeric(12)
 
   Campaign.all.each do |c|
     result << {
       'campagne': c.name,
-      'public': "#{host}/index.html?_ijt=#{random}&key=#{c.public_key}",
-      'rebels_edit': "#{host}/index.html?_ijt=#{random}&key=#{c.rebels_edit_key}&rebels_edit=true",
-      'rebels_status': "#{host}/status.html?_ijt=#{random}&side=rebels&key=#{c.rebels_status_key}",
-      'imperial_status': "#{host}/status.html?_ijt=#{random}&side=imperial&key=#{c.imperial_status_key}"
+      'public': "#{host}/index.html?&key=#{c.public_key}",
+      'rebels_edit': "#{host}/index.html?&key=#{c.rebels_edit_key}&rebels_edit=true",
+      'rebels_status': "#{host}/status.html?&side=rebels&key=#{c.rebels_status_key}",
+      'imperial_status': "#{host}/status.html?&side=imperial&key=#{c.imperial_status_key}"
     }
   end
 
