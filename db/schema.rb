@@ -28,7 +28,10 @@ ActiveRecord::Schema.define(version: 2021_04_10_064259) do
   create_table "tokens", force: :cascade do |t|
     t.string "location", null: false
     t.integer "status", limit: 1, null: false
+    t.integer "campaign_id", null: false
+    t.index ["campaign_id"], name: "index_tokens_on_campaign_id"
     t.index ["location"], name: "index_tokens_on_location", unique: true
   end
 
+  add_foreign_key "tokens", "campaigns"
 end

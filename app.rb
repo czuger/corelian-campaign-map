@@ -19,18 +19,34 @@ settings = JSON.parse(settings)
 set :database, {adapter: 'sqlite3', database: settings['db']}
 set :port, settings['port']
 
-def validate_campaign()
+def get_campaign(access, key)
+  Campaign.where(access => key).take()
+end
 
 # routes...
 get '/' do
-  tokens = Token.all
+  campaign = get_campaign('public_key', params['key'])
+  if campaign
+    tokens = campaign.tokens.all
 
-  result = []
-  tokens.each do |e|
-    result << { status: [2, 3].include?(e.status) ? 5 : e.status, location: e.location }
+    result = []
+    tokens.each do |e|
+      result << { status: [2, 3].include?(e.status) ? 5 : e.status, location: e.location }
+    end
+
+    return result.to_json
+  else
+    return 'Denied'
   end
+end
 
-  return result.to_json
+get '/rebels_edit' do
+  campaign = get_campaign('rebels_edit_key', params['key'])
+  if campaign
+    return campaign.tokens.all.to_json
+  else
+    return 'Denied'
+  end
 end
 
 get '/imperial' do
@@ -88,7 +104,7 @@ end
 
 get '/list_campaigns' do
   result = []
-  host = 'http://localhost:63342/corelian-campaign-map/html'
+  host = 'http://localhost:63343/corelian-campaign-map/html'
   random = SecureRandom.alphanumeric(12)
 
   Campaign.all.each do |c|

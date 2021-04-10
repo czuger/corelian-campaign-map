@@ -70,16 +70,22 @@ var vm = new Vue({
     mounted: function () {
         // console.log(make_host('/'));
 
+        key = get_url_parameter('key');
+
         axios
-            .get(make_host('/'))
+            .get(make_host('/?key='+key))
             .then(response => {
                 console.log(response.data);
 
-                for (const d of response.data){
-                    console.log(d);
-                    var a = read_area(d);
-                    console.log(a);
-                    this.tokens.push(a);
+                if(response.data=='Denied'){
+                    window.location.replace('/denied.html');
+                }
+                else
+                {
+                    for (const d of response.data){
+                        var a = read_area(d);
+                        this.tokens.push(a);
+                    }
                 }
             }
         )
