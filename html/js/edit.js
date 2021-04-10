@@ -37,12 +37,7 @@ Vue.component('base-img', {
                     break;
 
                 case 2:
-                    if(imperial_view == 'true'){
-                        return 'pics/RebelPresence_sticker.png';
-                    }else{
-                        return 'pics/RebelBase_sticker.png';
-                    }
-
+                    return 'pics/RebelBase_sticker.png';
                     break;
 
                 case 3:
@@ -57,6 +52,11 @@ Vue.component('base-img', {
                 case 4:
                     return 'pics/PresenceDestroyed_sticker.png';
                     break;
+
+                case 5:
+                    return 'pics/RebelPresence_sticker.png';
+                    break;
+
 
                 // default:
                 //     console.log(`Unknown pic status ${this.pic_status}`);
@@ -104,10 +104,11 @@ var vm = new Vue({
                     var style = 'top:' + (y) + 'px;left:' + (x) + 'px';
                 }
                 else{
-                    const x = event.offsetX;
-                    const y = event.offsetY;
-                    var style = 'top:' + (y - 21) + 'px;left:' + (x - 21) + 'px';
-                    area_data = [];
+                    // Cant click outside points anymore.
+                    // const x = event.offsetX;
+                    // const y = event.offsetY;
+                    // var style = 'top:' + (y - 21) + 'px;left:' + (x - 21) + 'px';
+                    // area_data = [];
                 }
 
                 // console.log(style);

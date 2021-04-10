@@ -3,8 +3,10 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/cors'
 require 'json'
+require 'securerandom'
 
 require_relative 'models/token'
+require_relative 'models/campaign'
 
 set :allow_origin, '*'
 set :allow_methods, 'GET,HEAD,POST,OPTIONS'
@@ -20,7 +22,7 @@ set :port, settings['port']
 # routes...
 get '/' do
   tokens = Token.all
-  tokens.to_a.to_json
+  tokens.to_a.map{to_json
 end
 
 get '/imperial' do
@@ -62,4 +64,33 @@ post '/delete_position' do
   # p location
 
   Token.where(location: location).delete_all
+end
+
+post '/new_campaign' do
+  Campaign.create!(
+      name: params['name'],
+      public_key: SecureRandom.hex(12),
+      rebels_edit_key: SecureRandom.hex(12),
+      rebels_status_key: SecureRandom.hex(12),
+      imperial_status_key: SecureRandom.hex(12)
+  )
+
+  return 'Ok'
+end
+
+get '/list_campaigns' do
+  result = []
+  host = 'http://localhost:63342/corelian-campaign-map/html'
+  random = SecureRandom.alphanumeric(12)
+
+  Campaign.all.each do |c|
+    result << {
+      'public': "#{host}/index.html?_ijt=#{random}&imperial=true&key=#{c.public_key}",
+      'rebels_edit': "#{host}/index.html?_ijt=#{random}&key=#{c.rebels_edit_key}",
+      'rebels_status': "#{host}/status.html?_ijt=#{random}&side=imperial&key=#{c.rebels_status_key}",
+      'imperial_status': "#{host}/status.html?_ijt=#{random}&side=rebels&key=#{c.imperial_status_key}"
+    }
+  end
+
+  return result.to_json
 end
