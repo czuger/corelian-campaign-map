@@ -31,7 +31,7 @@ get '/' do
 
     result = []
     tokens.each do |e|
-      result << { status: [2, 3].include?(e.status) ? 5 : e.status, location: e.location }
+      result << { status: [2, 3].include?(e.status) ? 99 : e.status, location: e.location }
     end
 
     return result.to_json
@@ -60,10 +60,10 @@ get '/rebels' do
 end
 
 post '/add_position' do
+  campaign = get_campaign('rebels_edit_key', params['key'])
   location = params['location']
-  status = params['status']
 
-  token = Token.where(location: location).first_or_initialize{ |t|
+  token = campaign.tokens.where(location: location).first_or_initialize{ |t|
     t.status = 1
   }
   token.save!
@@ -71,12 +71,13 @@ post '/add_position' do
 end
 
 post '/modify_position' do
+  campaign = get_campaign('rebels_edit_key', params['key'])
   location = params['location']
   status = params['status']
 
   # p location
 
-  token = Token.where(location: location).take
+  token = campaign.tokens.where(location: location).take
   token.status = status
   token.save!
 end
@@ -109,8 +110,8 @@ get '/list_campaigns' do
 
   Campaign.all.each do |c|
     result << {
-      'public': "#{host}/index.html?_ijt=#{random}&imperial=true&key=#{c.public_key}",
-      'rebels_edit': "#{host}/index.html?_ijt=#{random}&key=#{c.rebels_edit_key}",
+      'public': "#{host}/index.html?_ijt=#{random}&key=#{c.public_key}",
+      'rebels_edit': "#{host}/index.html?_ijt=#{random}&key=#{c.rebels_edit_key}&rebels_edit=true",
       'rebels_status': "#{host}/status.html?_ijt=#{random}&side=imperial&key=#{c.rebels_status_key}",
       'imperial_status': "#{host}/status.html?_ijt=#{random}&side=rebels&key=#{c.imperial_status_key}"
     }

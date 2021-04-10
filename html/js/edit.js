@@ -8,22 +8,23 @@ Vue.component('base-img', {
     data: function () {
         return { pic_status: null }
     },
-    props: ['pos', 'index', 'area', 'pic_status_init', 'imperial_view'],
+    props: ['pos', 'index', 'area', 'pic_status_init', 'rebels_edit_view'],
     template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status">',
     methods: {
         change_status: function (event) {
-            if(!imperial_view){
+            if(rebels_edit_view){
                 this.pic_status += 1;
 
                 // console.log(this._uid, this.pic_status);
+                let key = get_url_parameter('key');
 
                 if (this.pic_status >= 5) {
                     // Vue.delete(vm.tokens, this.index);
-                    $.post(make_host('/delete_position'),
+                    $.post(make_host('/delete_position?key='+key),
                         {location: this.area, status: this.pic_status});
                 }else
                 {
-                    $.post(make_host('/modify_position'),
+                    $.post(make_host('/modify_position?key='+key),
                         {location: this.area, status: this.pic_status});
                 }
             }
@@ -48,13 +49,13 @@ Vue.component('base-img', {
                     return 'pics/PresenceDestroyed_sticker.png';
                     break;
 
-                case 5:
+                case 99:
                     return 'pics/RebelPresence_sticker.png';
                     break;
 
 
-                // default:
-                //     console.log(`Unknown pic status ${this.pic_status}`);
+                default:
+                    console.log(`Unknown pic status ${this.pic_status}`);
             }
         }
     },
@@ -70,10 +71,17 @@ var vm = new Vue({
     mounted: function () {
         // console.log(make_host('/'));
 
-        key = get_url_parameter('key');
+        let key = get_url_parameter('key');
+        let rebels_edit = get_url_parameter('rebels_edit');
+
+        let url = make_host('/?key='+key);
+        if(rebels_edit){
+            url = make_host('/rebels_edit?key='+key);
+            rebels_edit_view = true;
+        }
 
         axios
-            .get(make_host('/?key='+key))
+            .get(url)
             .then(response => {
                 console.log(response.data);
 
@@ -83,21 +91,19 @@ var vm = new Vue({
                 else
                 {
                     for (const d of response.data){
-                        var a = read_area(d);
+                        let a = read_area(d);
                         this.tokens.push(a);
                     }
                 }
             }
         )
     },
-    created: function () {
-        imperial_view = get_url_parameter('imperial');
-    },
     methods: {
         onclick: function (event) {
-            if(!imperial_view)
+            if(rebels_edit_view)
             {
                 var area_data = get_area(event.offsetX, event.offsetY);
+                let key = get_url_parameter('key');
 
                 if(area_data){
                     const y = area_data[1];
@@ -117,7 +123,7 @@ var vm = new Vue({
 
                 if(area_data)
                 {
-                    $.post( make_host('/add_position'), { location: area_data[0], status: 1 } );
+                    $.post( make_host('/add_position?key='+key), { location: area_data[0], status: 1 } );
                 }
             }
         }
