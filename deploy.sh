@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ..
-
-scp -r corelian-campaign-map/models cloud_ovh:~/ruby/corelian-campaign-map/
-scp -r corelian-campaign-map/db cloud_ovh:~/ruby/corelian-campaign-map/
-scp corelian-campaign-map/* cloud_ovh:~/ruby/corelian-campaign-map/
+scp -r models cloud_ovh:~/ruby/corelian-campaign-map/
+scp -r db cloud_ovh:~/ruby/corelian-campaign-map/
+scp * cloud_ovh:~/ruby/corelian-campaign-map/

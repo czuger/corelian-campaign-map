@@ -50,12 +50,14 @@ get '/rebels_edit' do
 end
 
 get '/imperial' do
-  tokens = Token.where(status: 1)
+  campaign = get_campaign('imperial_status_key', params['key'])
+  tokens = campaign.tokens.where(status: 1)
   tokens.to_a.to_json
 end
 
 get '/rebels' do
-  tokens = Token.where(status: [2, 3])
+  campaign = get_campaign('rebels_status_key', params['key'])
+  tokens = campaign.tokens.where(status: [2, 3])
   tokens.to_a.to_json
 end
 
@@ -105,15 +107,15 @@ end
 
 get '/list_campaigns' do
   result = []
-  host = 'http://localhost:63343/corelian-campaign-map/html'
+  host = settings['host']
   random = SecureRandom.alphanumeric(12)
 
   Campaign.all.each do |c|
     result << {
       'public': "#{host}/index.html?_ijt=#{random}&key=#{c.public_key}",
       'rebels_edit': "#{host}/index.html?_ijt=#{random}&key=#{c.rebels_edit_key}&rebels_edit=true",
-      'rebels_status': "#{host}/status.html?_ijt=#{random}&side=imperial&key=#{c.rebels_status_key}",
-      'imperial_status': "#{host}/status.html?_ijt=#{random}&side=rebels&key=#{c.imperial_status_key}"
+      'rebels_status': "#{host}/status.html?_ijt=#{random}&side=rebels&key=#{c.rebels_status_key}",
+      'imperial_status': "#{host}/status.html?_ijt=#{random}&side=imperial&key=#{c.imperial_status_key}"
     }
   end
 

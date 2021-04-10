@@ -11,9 +11,10 @@ var vm = new Vue({
         // console.log(make_host('/'));
 
         const view_name = get_url_parameter('side');
+        const key = get_url_parameter('key');
 
         axios
-            .get(make_host('/'+view_name))
+            .get(make_host('/'+view_name+'?key='+key))
             .then(response => {
                     console.log(response.data);
 

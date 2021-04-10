@@ -54,8 +54,8 @@ Vue.component('base-img', {
                     break;
 
 
-                default:
-                    console.log(`Unknown pic status ${this.pic_status}`);
+                // default:
+                //     console.log(`Unknown pic status ${this.pic_status}`);
             }
         }
     },
