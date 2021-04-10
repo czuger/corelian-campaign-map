@@ -19,10 +19,18 @@ settings = JSON.parse(settings)
 set :database, {adapter: 'sqlite3', database: settings['db']}
 set :port, settings['port']
 
+def validate_campaign()
+
 # routes...
 get '/' do
   tokens = Token.all
-  tokens.to_a.map{to_json
+
+  result = []
+  tokens.each do |e|
+    result << { status: [2, 3].include?(e.status) ? 5 : e.status, location: e.location }
+  end
+
+  return result.to_json
 end
 
 get '/imperial' do

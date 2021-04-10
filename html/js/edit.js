@@ -41,12 +41,7 @@ Vue.component('base-img', {
                     break;
 
                 case 3:
-                    if(imperial_view == 'true'){
-                        return 'pics/RebelPresence_sticker.png';
-                    }else{
-                        return 'pics/RebelOutpost_sticker.png';
-                    }
-
+                    return 'pics/RebelOutpost_sticker.png';
                     break;
 
                 case 4:
