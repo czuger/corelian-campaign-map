@@ -112,6 +112,7 @@ get '/list_campaigns' do
 
   Campaign.all.each do |c|
     result << {
+      'campagne': c.name,
       'public': "#{host}/index.html?_ijt=#{random}&key=#{c.public_key}",
       'rebels_edit': "#{host}/index.html?_ijt=#{random}&key=#{c.rebels_edit_key}&rebels_edit=true",
       'rebels_status': "#{host}/status.html?_ijt=#{random}&side=rebels&key=#{c.rebels_status_key}",
