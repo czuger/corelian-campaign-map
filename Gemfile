@@ -15,4 +15,7 @@ gem 'rake'
 
 gem 'rerun'
 
+gem 'omniauth'
+gem 'omniauth-oauth2'
+gem 'omniauth-discord'
 
