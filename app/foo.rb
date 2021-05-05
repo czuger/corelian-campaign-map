@@ -1,15 +1,11 @@
 require 'sinatra/base'
 
 module Sinatra
-  module OmniAuth
+  module Foo
 
     def self.registered(app)
       app.get '/' do
-        erb "
-    <a href='http://localhost:4567/auth/github'>Login with Github</a><br>
-    <a href='http://localhost:4567/auth/facebook'>Login with facebook</a><br>
-    <a href='http://localhost:4567/auth/twitter'>Login with twitter</a><br>
-    <a href='http://localhost:4567/auth/att-foundry'>Login with att-foundry</a>"
+        haml :login
       end
 
       app.get '/auth/:provider/callback' do
@@ -38,5 +34,5 @@ module Sinatra
     end
   end
 
-  register OmniAuth
+  register Foo
 end
