@@ -6,6 +6,8 @@ class CreateCampaigns < ActiveRecord::Migration[6.1]
       t.string :rebels_edit_key, index: { unique: true }, null: false
       t.string :rebels_status_key, index: { unique: true }, null: false
       t.string :imperial_status_key, index: { unique: true }, null: false
+
+      t.timestamps
     end
   end
 end

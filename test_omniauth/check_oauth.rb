@@ -39,7 +39,7 @@ end
 # post '/auth/:name/callback' do
 #   auth = request.env['omniauth.auth']
 #   # do whatever you want with the information!
-# end
+# end ,;
 
 get '/auth/failure' do
   p params['message']
