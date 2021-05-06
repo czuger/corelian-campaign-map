@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-cd app
-bundle exec rerun --pattern '**/*.rb' 'ruby corelian-campaign.rb'
+bundle exec rerun --pattern '**/*.rb' 'ruby app/corelian_campaign.rb'
