@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_195816) do
+ActiveRecord::Schema.define(version: 2021_05_05_193846) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 2021_04_10_195816) do
     t.index ["rebels_status_key"], name: "index_campaigns_on_rebels_status_key", unique: true
   end
 
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "campaign_id", null: false
+    t.string "side", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["campaign_id"], name: "index_players_on_campaign_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
+  end
+
   create_table "tokens", force: :cascade do |t|
     t.string "location", null: false
     t.integer "status", limit: 1, null: false
@@ -37,5 +47,16 @@ ActiveRecord::Schema.define(version: 2021_04_10_195816) do
     t.index ["campaign_id"], name: "index_tokens_on_campaign_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "uid", null: false
+    t.string "avatar", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["uid"], name: "index_users_on_uid", unique: true
+  end
+
+  add_foreign_key "players", "campaigns"
+  add_foreign_key "players", "users"
   add_foreign_key "tokens", "campaigns"
 end

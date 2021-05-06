@@ -1,2 +1,3 @@
-%a{href: '/auth/developer'} Login with discord
-%br/
+%form{action: '/auth/discord', method: 'post'}
+  %input{name: 'authenticity_token', type: 'hidden', value: request.env['rack.session']['csrf']}
+  %input{type: 'submit', value: 'Login with discord', class: 'btn'}/
