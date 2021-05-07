@@ -1,0 +1,12 @@
+.h1
+  Choisissez un nom de campagne
+
+
+%form{action: '/campaign/create', method: 'post'}
+  %label.form-label{:for => "campaign_name"} Nom de la campagne
+  %input#campaign_name.mt-1.form-control
+
+  %button.btn.btn-primary.btn-bloc.mt-3{ type: :submit }
+    Créer
+
+= haml :common_js

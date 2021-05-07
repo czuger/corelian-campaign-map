@@ -24,11 +24,6 @@ module Sinatra
     end
 
     def self.registered(app)
-
-      app.get '/campaigns' do
-        current_user.campaigns
-      end
-
       app.get '/rebels_edit' do
         campaign = app.get_campaign('rebels_edit_key', params['key'])
         if campaign

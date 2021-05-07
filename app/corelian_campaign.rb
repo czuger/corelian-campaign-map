@@ -12,6 +12,7 @@ require 'omniauth-discord'
 require_relative 'models/campaign'
 require_relative 'engine'
 require_relative 'auth'
+require_relative 'campaigns'
 
 # Thanks to : http://sinatrarb.com/extensions.html
 # and : https://gist.github.com/fairchild/1442227
