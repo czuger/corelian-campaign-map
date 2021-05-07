@@ -8,12 +8,17 @@
         Campagne
       %th
         Admin
+      %th
 
   %tbody
     - @players.each do |player|
       %tr
         %td= player.campaign.name
         %td= player.admin ? 'Oui' : 'Non'
+        %td
+          - if player.admin
+            %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{player.campaign.id}/add_player/new"}
+              Ajouter un joueur
 
 
 %a{ role: :button, class: 'btn btn-primary btn-block', href: '/campaign/new'}

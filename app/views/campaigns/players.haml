@@ -1,0 +1,19 @@
+.h1
+  Liste des joueurs de la campagne
+
+%table.table
+  %thead
+    %tr
+      %th
+        Joueur
+      %th
+        Camp
+      %th
+        Admin
+
+  %tbody
+    - @players.each do |player|
+      %tr
+        %td= player.user.name
+        %td= side(player)
+        %td= player.admin ? 'Oui' : 'Non'

@@ -26,8 +26,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_193846) do
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["campaign_id"], name: "index_players_on_campaign_id"
-    t.index ["user_id"], name: "index_players_on_user_id"
+    t.index ["campaign_id", "user_id"], name: "index_players_on_campaign_id_and_user_id", unique: true
   end
 
   create_table "tokens", force: :cascade do |t|

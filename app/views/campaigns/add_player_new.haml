@@ -1,0 +1,21 @@
+.h1
+  Choisir un joueur à ajouter à la campagne
+
+%table.table
+  %thead
+    %tr
+      %th
+        Joueur
+      %th
+      %th
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td
+          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{@campaign_id}/add_player/#{user.id}/empire/add"}
+            Empire
+        %td
+          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{@campaign_id}/add_player/#{user.id}/rebel/add"}
+            Rebelle
