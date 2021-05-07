@@ -6,7 +6,7 @@
     %tr
       %th
         Joueur
-      %th
+      %th{ colspan: 2 }
         Camp
       %th
         Admin
@@ -15,5 +15,6 @@
     - @players.each do |player|
       %tr
         %td= player.user.name
-        %td= side(player)
+        %td= empire_button(player)
+        %td= rebel_button(player)
         %td= player.admin ? 'Oui' : 'Non'

@@ -15,6 +15,30 @@ module Sinatra
           nil
         end
       end
+
+      def admin?
+        u = current_user
+        Player.where(user_id: u.id, campaign_id: @campaign.id, admin: true).exists?
+      end
+
+      def empire_button(player)
+        if @admin
+          btn_type = player.side == 'empire' ? 'btn-primary' : 'btn-light'
+          "<a href='/campaign/#{@campaign.id}/add_player/#{player.id}/empire/update' class='btn #{btn_type} btn-block'>Empire</a>"
+        else
+          'Empire' if player.side == 'empire'
+        end
+      end
+
+      def rebel_button(player)
+        if @admin
+          btn_type = player.side == 'rebel' ? 'btn-primary' : 'btn-light'
+          "<a href='/campaign/#{@campaign.id}/add_player/#{player.id}/rebel/update' class='btn #{btn_type} btn-block'>Rebel</a>"
+        else
+          'Rebel' if player.side == 'rebel'
+        end
+      end
+
     end
 
     def self.registered(app)
@@ -61,26 +85,38 @@ module Sinatra
       app.get '/campaign/:campaign_id/add_player/:user_id/:side/add' do
         authorize!
 
-        u = current_user
+        @campaign = Campaign.find(params['campaign_id'])
 
-        # Check if the current user is admin for the campaign
-        campaign_id = params['campaign_id']
-
-        if Player.where(user_id: u.id, campaign_id: campaign_id, admin: true).exists?
-          unless Player.where(user_id: params['user_id'], campaign_id: campaign_id).exists?
-            Player.create!(user_id: params['user_id'], campaign_id: campaign_id, side: params['side'])
+        if admin?
+          unless Player.where(user_id: params['user_id'], campaign_id: @campaign.id).exists?
+            Player.create!(user_id: params['user_id'], campaign_id: @campaign.id, side: params['side'])
           end
         end
 
         redirect "campaign/#{campaign_id}/players"
       end
 
+      app.get '/campaign/:campaign_id/add_player/:user_id/:side/update' do
+        authorize!
+
+        @campaign = Campaign.find(params['campaign_id'])
+
+        if admin?
+          player = Player.where(user_id: params['user_id'], campaign_id: @campaign.id).take
+          player.side = params['side']
+          player.save!
+        end
+
+        redirect "campaign/#{@campaign.id}/players"
+      end
+
       app.get '/campaign/:campaign_id/players' do
         authorize!
 
-        c = Campaign.find(params[:campaign_id])
+        @campaign = Campaign.find(params[:campaign_id])
 
-        @players = c.players.includes(:user)
+        @admin = admin?
+        @players = @campaign.players.includes(:user)
 
         haml :'campaigns/players'
       end
