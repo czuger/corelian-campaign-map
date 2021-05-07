@@ -14,8 +14,8 @@
       %tr
         %td= user.name
         %td
-          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{@campaign_id}/add_player/#{user.id}/empire/add"}
+          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{@campaign.id}/add_player/#{user.id}/empire/add"}
             Empire
         %td
-          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{@campaign_id}/add_player/#{user.id}/rebel/add"}
+          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{@campaign.id}/add_player/#{user.id}/rebel/add"}
             Rebelle

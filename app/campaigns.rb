@@ -76,8 +76,10 @@ module Sinatra
 
         u = current_user
 
-        @campaign_id = params['campaign_id']
-        @users = User.where.not(id: u.id)
+        @campaign = Campaign.find(params['campaign_id'])
+        players_ids = @campaign.players.pluck(:user_id)
+        players_ids << u.id
+        @users = User.where.not(id: players_ids)
 
         haml :'campaigns/add_player_new'
       end
