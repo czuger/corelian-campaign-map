@@ -7,6 +7,7 @@ module Sinatra
     module Helpers
       def authorized?
         p session
+        p request.env
         !session[:user_id].nil?
       end
 

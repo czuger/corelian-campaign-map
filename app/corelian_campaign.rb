@@ -25,7 +25,8 @@ settings = JSON.parse(settings)
 
 use Rack::Session::Cookie, :secret => settings['session_key'], :key => 'corelian_campaign_session'
 
-# set :sessions, true
+# Need this otherwise first connection don't work. Need to work with only one session.
+set :sessions, true
 # set :session_secret, (ENV['CC_SESSION_SECRET'].to_s == '' ? SecureRandom.base64 : ENV['CC_SESSION_SECRET'])
 set :database_file, "#{Dir.getwd}/config/database.yml"
 set :port, settings['port']
