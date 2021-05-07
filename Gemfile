@@ -16,7 +16,7 @@ gem 'rake'
 gem 'rerun'
 
 gem 'omniauth'
-gem 'omniauth-oauth2'
+# gem 'omniauth-oauth2'
 gem 'omniauth-discord'
 # gem 'omniauth-rails_csrf_protection'
 # gem 'omniauth-twitter'

@@ -2,5 +2,6 @@
     "port": 4567,
     "host": "localhost",
     "discord_auth_id": 'id',
-    "discord_auth_key": "key"
+    "discord_auth_key": "key",
+    "session_key": "session_key"
 }

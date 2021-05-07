@@ -40,7 +40,6 @@ module Sinatra
         haml :login
       end
 
-
       app.get '/auth/:provider/callback' do
         register_user(request.env['omniauth.auth'])
         redirect '/'

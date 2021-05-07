@@ -5,7 +5,7 @@ require 'sinatra/activerecord'
 require 'json'
 require 'securerandom'
 
-require 'omniauth-oauth2'
+require 'omniauth'
 require 'omniauth-discord'
 
 # require_relative 'models/ls/token'
@@ -17,13 +17,13 @@ require_relative 'campaigns'
 # Thanks to : http://sinatrarb.com/extensions.html
 # and : https://gist.github.com/fairchild/1442227
 
-use Rack::Session::Cookie, :secret => 'foo', :key => 'corelian_campaign_session'
-
 # register Sinatra::Engine
 # register Sinatra::Auth
 
 settings = File.read("#{Dir.getwd}/config/settings.json")
 settings = JSON.parse(settings)
+
+use Rack::Session::Cookie, :secret => settings['session_key'], :key => 'corelian_campaign_session'
 
 # set :sessions, true
 # set :session_secret, (ENV['CC_SESSION_SECRET'].to_s == '' ? SecureRandom.base64 : ENV['CC_SESSION_SECRET'])

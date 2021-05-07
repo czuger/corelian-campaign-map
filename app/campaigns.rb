@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require_relative 'models/user'
 require_relative 'models/campaign'
+require_relative 'models/player'
 
 module Sinatra
   module Campaigns
