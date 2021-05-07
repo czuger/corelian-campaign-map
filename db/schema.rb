@@ -14,23 +14,16 @@ ActiveRecord::Schema.define(version: 2021_05_05_193846) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
-    t.string "public_key", null: false
-    t.string "rebels_edit_key", null: false
-    t.string "rebels_status_key", null: false
-    t.string "imperial_status_key", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["imperial_status_key"], name: "index_campaigns_on_imperial_status_key", unique: true
     t.index ["name"], name: "index_campaigns_on_name", unique: true
-    t.index ["public_key"], name: "index_campaigns_on_public_key", unique: true
-    t.index ["rebels_edit_key"], name: "index_campaigns_on_rebels_edit_key", unique: true
-    t.index ["rebels_status_key"], name: "index_campaigns_on_rebels_status_key", unique: true
   end
 
   create_table "players", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "campaign_id", null: false
-    t.string "side", null: false
+    t.string "side"
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["campaign_id"], name: "index_players_on_campaign_id"

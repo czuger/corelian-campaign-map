@@ -40,9 +40,6 @@ use OmniAuth::Builder do
 end
 
 get '/' do
-  if authorized?
-    redirect '/campaigns'
-  else
-    redirect '/login'
-  end
+  authorize!
+  redirect '/campaigns'
 end

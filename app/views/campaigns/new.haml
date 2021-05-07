@@ -4,7 +4,7 @@
 
 %form{action: '/campaign/create', method: 'post'}
   %label.form-label{:for => "campaign_name"} Nom de la campagne
-  %input#campaign_name.mt-1.form-control
+  %input#campaign_name.mt-1.form-control{ type: :text, name: :campaign_name }
 
   %button.btn.btn-primary.btn-bloc.mt-3{ type: :submit }
     Créer

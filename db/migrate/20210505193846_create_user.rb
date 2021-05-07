@@ -11,7 +11,8 @@ class CreateUser < ActiveRecord::Migration[6.1]
     create_table :players do |t|
       t.references :user, null: false, foreign_key: true
       t.references :campaign, null: false, foreign_key: true
-      t.string :side, null: false
+      t.string :side, null: true
+      t.boolean :admin, null: false, default: false
 
       t.timestamps
     end
