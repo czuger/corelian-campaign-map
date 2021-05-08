@@ -13,7 +13,7 @@ module Sinatra
       'rebel_outpost': '/pics/RebelOutpost_sticker.png',
       'destroyed': '/pics/PresenceDestroyed_sticker.png',
       'diplomat': '/pics/StratEff_Diplomat.png',
-      rebel_presence: '/pics/PresenceDestroyed_sticker.png'
+      rebel_presence: '/pics/RebelPresence_sticker.png'
     }
 
     module Helpers
@@ -42,8 +42,15 @@ module Sinatra
         @tokens_hash = icons_hash
         @tokens_hash[:tokens] = @campaign.tokens.all.to_a
 
+        p current_player
         if current_player.side != 'rebel'
-          @tokens_hash[:tokens].map!{ |e| REBEL_HIDDEN.include?(e) ? :rebel_presence : e }
+          p @tokens_hash[:tokens]
+
+          for token in @tokens_hash[:tokens]
+            token.status = :rebel_presence if REBEL_HIDDEN.include?(token.status)
+          end
+
+          p @tokens_hash[:tokens]
         end
 
         haml :map, layout: :map_layout
