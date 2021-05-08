@@ -40,6 +40,10 @@ module Sinatra
         end
       end
 
+      def current_player
+        Player.where(user_id: current_user.id, campaign_id: @campaign.id).take
+      end
+
     end
 
     def self.registered(app)
