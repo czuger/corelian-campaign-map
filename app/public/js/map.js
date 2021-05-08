@@ -21,22 +21,10 @@ Vue.component('base-img', {
                 this.pic_status = tokens_hash.cycle[index+1];
             }
 
-            // if(rebels_edit_view){
-            //     this.pic_status += 1;
-            //
-            //     // console.log(this._uid, this.pic_status);
-            //     let key = get_url_parameter('key');
-            //
-            //     if (this.pic_status >= 5) {
-            //         // Vue.delete(vm.tokens, this.index);
-            //         $.post(make_host('/delete_position?key='+key),
-            //             {location: this.area, status: this.pic_status});
-            //     }else
-            //     {
-            //         $.post(make_host('/modify_position?key='+key),
-            //             {location: this.area, status: this.pic_status});
-            //     }
-            // }
+            const campaign_id = $('#campaign_id').val();
+
+            const url = `/map/${campaign_id}/set_position/${this.area}/${this.pic_status}`;
+            $.post( url );
         }
     },
     computed: {
@@ -57,10 +45,10 @@ var vm = new Vue({
         const campaign_id = $('#campaign_id').val();
         tokens_hash = JSON.parse($('#tokens_hash').val());
 
-        //             for (const d of response.data){
-        //                 let a = read_area(d);
-        //                 this.tokens.push(a);
-        //             }
+        for (const d of tokens_hash.tokens){
+            let a = read_area(d);
+            this.tokens.push(a);
+        }
     },
     methods: {
         onclick: function (event) {
@@ -82,16 +70,20 @@ var vm = new Vue({
             console.log(area_data);
             console.log(style);
 
-            this.tokens.push(
-                {
-                    pos: style, area: area_data[0], status: tokens_hash.cycle[0]
-                }
-            )
+            if(area_data){
+                const location = area_data[0];
+                const status = tokens_hash.cycle[0];
 
-            // if(area_data)
-            // {
-            //     $.post( make_host('/add_position?key='+key), { location: area_data[0], status: 1 } );
-            // }
+                this.tokens.push({pos: style, area: location, status: status});
+
+                if(area_data)
+                {
+                    const campaign_id = $('#campaign_id').val();
+
+                    const url = `/map/${campaign_id}/set_position/${location}/${status}`;
+                    $.post( url );
+                }
             }
         }
+    }
 });

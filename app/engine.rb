@@ -57,9 +57,8 @@ module Sinatra
         if token == 'empty'
           @campaign.tokens.where(location: location).delete_all
         else
-          db_token = @campaign.tokens.where(location: location).first_or_initialize{ |t|
-            t.status = token
-          }
+          db_token = @campaign.tokens.where(location: location).first_or_initialize
+          db_token.status = token
           db_token.save!
         end
       end
