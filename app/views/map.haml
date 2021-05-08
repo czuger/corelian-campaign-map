@@ -9,11 +9,13 @@
   v-bind:pos="token.pos"
   v-bind:area="token.area"
   v-bind:pic_status_init="token.status"
+  v-bind:owner="token.owner"
   >
   </base-img>
 
   %input{ type: :hidden, id: :campaign_id, value: @campaign.id }
   %input{ type: :hidden, id: :tokens_hash, value: @tokens_hash.to_json }
+  %input{ type: :hidden, id: :side, value: @side }
 
 %script{ type: 'application/javascript', src: '/js/external/jquery-3.6.0.min.js'}
 %script{ type: 'application/javascript', src: '/js/external/axios.min.js'}

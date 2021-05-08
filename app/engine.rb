@@ -38,6 +38,7 @@ module Sinatra
         p :foo
 
         @campaign = Campaign.find(params['campaign_id'])
+        @side = current_player.side
 
         @tokens_hash = icons_hash
         @tokens_hash[:tokens] = @campaign.tokens.all.to_a
@@ -61,12 +62,17 @@ module Sinatra
         location = params['location']
         token = params['token']
 
-        if token == 'empty'
-          @campaign.tokens.where(location: location).delete_all
-        else
-          db_token = @campaign.tokens.where(location: location).first_or_initialize
-          db_token.status = token
-          db_token.save!
+        ownership_token = @campaign.tokens.where(location: location).first
+
+        if !ownership_token || ownership_token.owner == current_player.side
+          if token == 'empty'
+            @campaign.tokens.where(location: location).delete_all
+          else
+            db_token = @campaign.tokens.where(location: location).first_or_initialize
+            db_token.status = token
+            db_token.owner = current_player.side
+            db_token.save!
+          end
         end
       end
     end
