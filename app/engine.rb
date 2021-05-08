@@ -28,7 +28,6 @@ module Sinatra
 
     def self.registered(app)
 
-
       app.get '/map/:campaign_id' do
         @campaign = Campaign.find(params['campaign_id'])
 
@@ -56,7 +55,6 @@ module Sinatra
           db_token.save!
         end
       end
-
     end
   end
 
