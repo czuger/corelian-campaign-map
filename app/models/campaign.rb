@@ -1,3 +1,5 @@
+require_relative 'token'
+
 class Campaign < ActiveRecord::Base
 
   has_many :tokens

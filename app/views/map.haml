@@ -1,0 +1,22 @@
+#main
+
+  <img src="/pics/map.jpg" v-on:click.self="onclick($event)">
+
+  <base-img
+  v-for="(token, index) in tokens" :key="token.id"
+  v-bind:index="index"
+  v-bind:key="token.pos"
+  v-bind:pos="token.pos"
+  v-bind:area="token.area"
+  v-bind:pic_status_init="token.status"
+  >
+  </base-img>
+
+  %input{ type: :hidden, id: :campaign_id, value: @campaign.id }
+  %input{ type: :hidden, id: :tokens_hash, value: @tokens_hash.to_json }
+
+%script{ type: 'application/javascript', src: '/js/external/jquery-3.6.0.min.js'}
+%script{ type: 'application/javascript', src: '/js/external/axios.min.js'}
+%script{ type: 'application/javascript', src: '/js/external/vue.js'}
+%script{ type: 'application/javascript', src: '/js/map.js' }
+%script{ type: 'application/javascript', src: '/js/zone_detection.js' }

@@ -10,6 +10,7 @@
         Admin
       %th
       %th
+      %th
 
   %tbody
     - @players.each do |player|
@@ -17,11 +18,14 @@
         %td= player.campaign.name
         %td= player.admin ? 'Oui' : 'Non'
         %td
-          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{player.campaign.id}/players"}
+          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/map/#{player.campaign_id}"}
+            Carte
+        %td
+          %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{player.campaign_id}/players"}
             Liste des joueur
         %td
           - if player.admin
-            %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{player.campaign.id}/add_player/new"}
+            %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{player.campaign_id}/add_player/new"}
               Ajouter un joueur
 
 
