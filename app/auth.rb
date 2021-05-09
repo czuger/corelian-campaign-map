@@ -6,8 +6,6 @@ module Sinatra
 
     module Helpers
       def authorized?
-        p session
-        p request.env
         !session[:user_id].nil?
       end
 
@@ -38,16 +36,32 @@ module Sinatra
       app.helpers Auth::Helpers
 
       app.get '/login' do
+        # p session.loaded?
+        # session[:init] = true
+        # p session.loaded?
+        #
+        # p session
+
+        @session_failure = session['crfs_failed']
+
+        p request.env['rack.session']
+
         haml :login
       end
 
       app.get '/auth/:provider/callback' do
         register_user(request.env['omniauth.auth'])
+        session['crfs_failed'] = false
         redirect '/'
       end
 
       app.get '/auth/failure' do
-        erb "<h1>Authentication Failed:</h1><h3>message:<h3> <pre>#{params}</pre>"
+        if !session.loaded?
+          session['crfs_failed'] = true
+          redirect '/login'
+        else
+          erb "<h1>Authentication Failed:</h1><h3>message:<h3> <pre>#{params}</pre>"
+        end
       end
 
       app.get '/auth/:provider/deauthorized' do

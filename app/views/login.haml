@@ -1,3 +1,7 @@
+- if @session_failure
+  %h3
+    Oups !!! petit problème de generation de token. Cela devrait être bon maintenant :)
+
 %form{action: '/auth/discord', method: 'post'}
   %input{name: 'authenticity_token', type: 'hidden', value: request.env['rack.session']['csrf']}
   %button.btn.btn-primary.btn-bloc.mt-3{ type: :submit }
