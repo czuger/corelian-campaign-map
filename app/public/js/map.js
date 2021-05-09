@@ -3,6 +3,7 @@
  */
 
 var tokens_hash = null;
+var token_id = 999999999;
 
 Vue.component('base-img', {
     data: function () {
@@ -12,7 +13,11 @@ Vue.component('base-img', {
     template: '<img class="base-class" :src="pic_path" :style="pos" v-on:click="change_status">',
     methods: {
         change_status: function (event) {
+            console.log('change_status');
+
             const side = $('#side').val();
+
+            console.log(`${side} === ${this.owner}`)
 
             if( side === this.owner){
                 let index = tokens_hash.cycle.findIndex(e => e === this.pic_status);
@@ -28,6 +33,10 @@ Vue.component('base-img', {
 
                 const url = `/map/${campaign_id}/set_position/${this.area}/${this.pic_status}`;
                 $.post( url );
+
+                if(this.pic_status === 'empty'){
+                    main_vue.remove_token(this.area);
+                }
             }
         }
     },
@@ -42,7 +51,7 @@ Vue.component('base-img', {
 });
 
 // L'objet est ajouté à une instance de Vue
-var vm = new Vue({
+var main_vue = new Vue({
     el: '#main',
     data: { tokens: [] },
     mounted: function () {
@@ -55,6 +64,24 @@ var vm = new Vue({
         }
     },
     methods: {
+        remove_token: function (location){
+            let new_tokens = [];
+
+            console.log('remove_tokens');
+            console.log(this.tokens);
+
+            for(token of this.tokens){
+
+                console.log(token);
+                console.log(`${token.area} != ${location}`);
+
+                if(token.area != location)
+                    new_tokens.push(token);
+            }
+
+            console.log(new_tokens);
+            this.tokens = new_tokens;
+        },
         onclick: function (event) {
             const side = $('#side').val();
 
@@ -81,7 +108,9 @@ var vm = new Vue({
                     const location = area_data[0];
                     const status = tokens_hash.cycle[0];
 
-                    this.tokens.push({pos: style, area: location, status: status});
+                    // need to remove the vuejs element on deletion.
+                    this.tokens.push({pos: style, area: location, status: status, id: token_id, owner: side});
+                    token_id += 1;
 
                     if(area_data)
                     {

@@ -55,7 +55,8 @@ function read_area(_data){
     for (const area of areas){
         if(area.zone === _data.location){
             style = 'top:' + (area.top) + 'px;left:' + (area.left) + 'px';
-            return {pos: style, area: _data.location, status: _data.status, construction: area.construction,
+            return {pos: style, area: _data.location, status: _data.status,
+                construction: area.construction,
                 db_id: _data.id, id: _data.id,
                 repair_yards: (area.repair_yards ? 5 : 0),
                 diplomats: (area.diplomats ? 1 : 0),
