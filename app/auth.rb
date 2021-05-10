@@ -18,7 +18,7 @@ module Sinatra
       end
 
       def register_user(auth_hash)
-        u = User.first_or_initialize(uid: auth_hash['uid'])
+        u = User.find_or_initialize_by(uid: auth_hash['uid'])
         u.name = auth_hash['info']['name']
         u.avatar = auth_hash['info']['image']
         u.save!
