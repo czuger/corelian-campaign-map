@@ -100,7 +100,7 @@ module Sinatra
           end
         end
 
-        redirect "campaign/#{campaign_id}/players"
+        redirect "campaign/#{@campaign.id}/players"
       end
 
       app.get '/campaign/:campaign_id/add_player/:user_id/:side/update' do
