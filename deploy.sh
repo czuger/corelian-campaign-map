@@ -9,3 +9,4 @@ scp .ruby-version cloud_ovh:~/ruby/corelian-campaign-map/
 scp Gemfile cloud_ovh:~/ruby/corelian-campaign-map/
 scp Gemfile.lock cloud_ovh:~/ruby/corelian-campaign-map/
 scp Rakefile cloud_ovh:~/ruby/corelian-campaign-map/
+scp restart.sh cloud_ovh:~/ruby/corelian-campaign-map/

@@ -103,13 +103,13 @@ module Sinatra
         redirect "campaign/#{@campaign.id}/players"
       end
 
-      app.get '/campaign/:campaign_id/add_player/:user_id/:side/update' do
+      app.get '/campaign/:campaign_id/add_player/:player_id/:side/update' do
         authorize!
 
         @campaign = Campaign.find(params['campaign_id'])
 
         if admin?
-          player = Player.where(user_id: params['user_id'], campaign_id: @campaign.id).take
+          player = Player.where(id: params['player_id'], campaign_id: @campaign.id).take
           player.side = params['side']
           player.save!
         end
