@@ -27,6 +27,11 @@
           - if player.admin
             %a{ role: :button, class: 'btn btn-primary btn-block', href: "/campaign/#{player.campaign_id}/add_player/new"}
               Ajouter un joueur
+        %td
+          - if player.admin
+            %a{ role: :button, class: 'btn btn-danger btn-block', href: "/campaign/#{player.campaign_id}/delete", onclick: "return confirm('Etes vous sur de vouloir supprimer cette campagne ?');"}
+              X
+
 
 
 %a{ role: :button, class: 'btn btn-primary btn-block', href: '/campaign/new'}
