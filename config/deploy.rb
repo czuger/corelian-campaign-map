@@ -49,3 +49,12 @@ append :linked_dirs, 'log'
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+task :restart_bot do
+  on roles :all do
+
+    execute 'supervisorctl restart corelia'
+  end
+end
+
+after 'deploy:finished', :restart_bot
