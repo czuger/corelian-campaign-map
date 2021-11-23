@@ -25,6 +25,7 @@ gem 'omniauth-discord'
 gem 'haml'
 # Thin has pool connection issues
 # gem 'thin'
+gem 'webrick'
 
 group :development do
   gem 'capistrano', '~> 3.10', require: false
