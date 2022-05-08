@@ -81,7 +81,7 @@ module Sinatra
         @campaign = Campaign.find(params['campaign_id'])
         @side = current_player.side
 
-        loaded_tokens = @campaign.tokens.where(owner: @side)
+        loaded_tokens = @campaign.tokens.where(owner: @side).where.not(status: 'destroyed')
         areas_content = YAML.load(File.read('config/areas_content.yml'))
 
         @tokens = []
