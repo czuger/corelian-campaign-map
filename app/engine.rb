@@ -3,8 +3,8 @@ require 'sinatra/base'
 module Sinatra
   module Engine
 
-    EMPIRE_CYCLE = %w(empire_base destroyed diplomat empty)
-    REBEL_CYCLE = %w(rebel_base rebel_outpost destroyed diplomat empty)
+    EMPIRE_CYCLE = %w(empire_base destroyed empty)
+    REBEL_CYCLE = %w(rebel_base rebel_outpost destroyed empty)
     REBEL_HIDDEN = %w(rebel_base rebel_outpost)
 
     PICS_CONVERT = {

@@ -32,7 +32,7 @@ use Rack::Session::Cookie,
 # Need this otherwise first connection don't work. Need to work with only one session.
 # set :sessions, true
 # set :session_secret, (ENV['CC_SESSION_SECRET'].to_s == '' ? SecureRandom.base64 : ENV['CC_SESSION_SECRET'])
-set :database_file, "#{Dir.getwd}/config/database.yml"
+set :database_file, "#{Dir.getwd}/db/config.yml"
 set :port, settings['port']
 
   # set :allow_origin, '*'

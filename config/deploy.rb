@@ -27,7 +27,7 @@ set :rbenv_prefix, '/usr/bin/rbenv exec'
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, 'config/database.yml'
+# append :linked_files, 'config/config.yml'
 
 append :linked_files, 'db/production.sqlite3', 'config/settings.json'
 

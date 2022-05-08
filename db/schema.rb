@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_193706) do
+ActiveRecord::Schema.define(version: 2022_05_08_100857) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
@@ -29,16 +29,8 @@ ActiveRecord::Schema.define(version: 2021_05_08_193706) do
     t.index ["campaign_id", "user_id"], name: "index_players_on_campaign_id_and_user_id", unique: true
   end
 
-  create_table "tokens", force: :cascade do |t|
-    t.string "location", null: false
-    t.string "status", limit: 1, null: false
-    t.integer "campaign_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "owner", null: false
-    t.index ["campaign_id", "location"], name: "index_tokens_on_campaign_id_and_location", unique: true
-    t.index ["campaign_id"], name: "index_tokens_on_campaign_id"
-  end
+# Could not dump table "tokens" because of following StandardError
+#   Unknown type 'bool' for column 'diplomat'
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
