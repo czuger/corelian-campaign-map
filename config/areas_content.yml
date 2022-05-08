@@ -133,7 +133,7 @@ Corfai: !ruby/object:OpenStruct
   spynets:
   diplomats:
 Xyquine II: !ruby/object:OpenStruct
-  construction: 1
+  construction: 11
   skilled_spacers:
   name: Xyquine II
   repair_yards: true
