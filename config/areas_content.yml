@@ -1,0 +1,176 @@
+---
+Froz: !ruby/object:OpenStruct
+  construction: 0
+  skilled_spacers:
+  name: Froz
+  repair_yards:
+  spynets:
+  diplomats: true
+Selonia: !ruby/object:OpenStruct
+  construction: 12
+  skilled_spacers:
+  name: Selonia
+  repair_yards: true
+  spynets:
+  diplomats:
+Crash's drift: !ruby/object:OpenStruct
+  construction: 13
+  skilled_spacers: true
+  name: Crash's drift
+  repair_yards:
+  spynets:
+  diplomats:
+Drall: !ruby/object:OpenStruct
+  construction: 9
+  skilled_spacers:
+  name: Drall
+  repair_yards:
+  spynets:
+  diplomats: true
+Polanis: !ruby/object:OpenStruct
+  construction: 15
+  skilled_spacers:
+  name: Polanis
+  repair_yards:
+  spynets:
+  diplomats:
+Corellia: !ruby/object:OpenStruct
+  construction: 20
+  skilled_spacers:
+  name: Corellia
+  repair_yards: true
+  spynets:
+  diplomats:
+Phemis: !ruby/object:OpenStruct
+  construction: 2
+  skilled_spacers:
+  name: Phemis
+  repair_yards:
+  spynets:
+  diplomats:
+Talus: !ruby/object:OpenStruct
+  construction: 8
+  skilled_spacers: true
+  name: Talus
+  repair_yards:
+  spynets:
+  diplomats:
+Tralus: !ruby/object:OpenStruct
+  construction: 8
+  skilled_spacers: true
+  name: Tralus
+  repair_yards:
+  spynets:
+  diplomats:
+Centerpoint: !ruby/object:OpenStruct
+  construction: 5
+  skilled_spacers:
+  name: Centerpoint
+  repair_yards:
+  spynets: true
+  diplomats:
+Aurea: !ruby/object:OpenStruct
+  construction: 9
+  skilled_spacers:
+  name: Aurea
+  repair_yards:
+  spynets:
+  diplomats: true
+Saberhing asteroid belt: !ruby/object:OpenStruct
+  construction: 16
+  skilled_spacers:
+  name: Saberhing asteroid belt
+  repair_yards: true
+  spynets:
+  diplomats:
+Sacorria: !ruby/object:OpenStruct
+  construction: 10
+  skilled_spacers:
+  name: Sacorria
+  repair_yards:
+  spynets:
+  diplomats:
+Raider's point: !ruby/object:OpenStruct
+  construction: 4
+  skilled_spacers:
+  name: Raider's point
+  repair_yards:
+  spynets: true
+  diplomats:
+Vagrand: !ruby/object:OpenStruct
+  construction: 8
+  skilled_spacers:
+  name: Vagrand
+  repair_yards: true
+  spynets:
+  diplomats:
+Plympto: !ruby/object:OpenStruct
+  construction: 1
+  skilled_spacers: true
+  name: Plympto
+  repair_yards:
+  spynets:
+  diplomats:
+Sileria: !ruby/object:OpenStruct
+  construction: 7
+  skilled_spacers: true
+  name: Sileria
+  repair_yards:
+  spynets:
+  diplomats:
+Truuzdann: !ruby/object:OpenStruct
+  construction: 8
+  skilled_spacers:
+  name: Truuzdann
+  repair_yards:
+  spynets:
+  diplomats:
+Corfai: !ruby/object:OpenStruct
+  construction: 19
+  skilled_spacers:
+  name: Corfai
+  repair_yards:
+  spynets:
+  diplomats:
+Xyquine II: !ruby/object:OpenStruct
+  construction: 1
+  skilled_spacers:
+  name: Xyquine II
+  repair_yards: true
+  spynets:
+  diplomats:
+Talfaglio: !ruby/object:OpenStruct
+  construction: 6
+  skilled_spacers:
+  name: Talfaglio
+  repair_yards:
+  spynets:
+  diplomats:
+Nubia: !ruby/object:OpenStruct
+  construction: 16
+  skilled_spacers:
+  name: Nubia
+  repair_yards: true
+  spynets:
+  diplomats:
+Forvand: !ruby/object:OpenStruct
+  construction: 2
+  skilled_spacers:
+  name: Forvand
+  repair_yards:
+  spynets: true
+  diplomats:
+Durd: !ruby/object:OpenStruct
+  construction: 17
+  skilled_spacers: true
+  name: Durd
+  repair_yards:
+  spynets:
+  diplomats:
+New plympto: !ruby/object:OpenStruct
+  construction: 9
+  skilled_spacers:
+  name: New plympto
+  repair_yards:
+  spynets:
+  diplomats:

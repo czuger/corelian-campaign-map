@@ -1,0 +1,32 @@
+
+#status
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Lieu
+        %th Type
+        %th.text-center Points
+        %th.text-center Réparation
+        %th.text-center Diplomats
+        %th.text-center Spynets
+        %th.text-center Skilled spacers
+
+    %tbody
+      - @tokens.each do |token|
+        %tr
+          %td= token.name
+          %td= token.status
+          %td.text-center= token.construction
+          %td.text-center= token.repair_yards
+          %td.text-center= token.diplomats
+          %td.text-center= token.spynets
+          %td.text-center= token.skilled_spacers
+
+    %tfoot
+      %tr.table-warning
+        %td{colspan: 2} Total
+        %td.text-center= @construction
+        %td.text-center= @repair
+        %td.text-center= @diplomats
+        %td.text-center= @spynets
+        %td.text-center= @skilled_spacers

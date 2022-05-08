@@ -52,3 +52,10 @@ end
 get '/' do
   redirect '/campaigns'
 end
+
+get '/status' do
+  authorize!
+  redirect '/campaigns'
+end
+
+

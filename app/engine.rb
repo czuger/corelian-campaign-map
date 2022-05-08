@@ -75,6 +75,51 @@ module Sinatra
           end
         end
       end
+
+      app.get '/status/:campaign_id' do
+        authorize!
+        @campaign = Campaign.find(params['campaign_id'])
+        @side = current_player.side
+
+        loaded_tokens = @campaign.tokens.where(owner: @side)
+        areas_content = YAML.load(File.read('config/areas_content.yml'))
+
+        @tokens = []
+        @construction = 0
+        @repair = 30
+        @diplomats = 0
+        @spynets = 0
+        @skilled_spacers = 0
+
+        loaded_tokens.each do |e|
+          t = areas_content[e.location].dup
+          # p t
+          
+          t.status = e[:status].split('_').last
+          
+          t.construction = t.construction + (t.status == 'base' ? 25 : 5)
+          @construction += t.construction
+
+          t.repair_yards = t.repair_yards ? 5 : 0
+          @repair += t.repair_yards
+
+          t.diplomats = t.diplomats ? 1 : 0
+          @diplomats += t.diplomats
+
+          t.spynets = t.spynets ? 1 : 0
+          @spynets += t.diplomats
+
+          t.skilled_spacers = t.skilled_spacers ? 1 : 0
+          @skilled_spacers += t.skilled_spacers
+
+          # p t
+          
+          @tokens << t
+          # p @tokens
+        end
+
+        haml :status
+      end
     end
   end
 
