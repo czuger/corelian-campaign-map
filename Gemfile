@@ -11,6 +11,7 @@ gem 'sinatra-contrib', '~> 2.1'
 gem 'sinatra-activerecord'
 # gem 'sinatra-cors'
 gem 'sqlite3'
+gem 'standalone_migrations'
 gem 'rake'
 
 gem 'rerun'
@@ -36,6 +37,4 @@ group :development do
 
   gem 'ed25519', '~> 1.2'
   gem 'bcrypt_pbkdf', '~> 1.0'
-
-  gem 'standalone_migrations'
 end
