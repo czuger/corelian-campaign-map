@@ -42,7 +42,11 @@ use OmniAuth::Builder do
   provider :discord, settings['discord_auth_id'], settings['discord_auth_key']
 end
 
-get '/' do
+before do
+  pass if %w[auth login logout].include? request.path_info.split('/')[1]
   authorize!
+end
+
+get '/' do
   redirect '/campaigns'
 end

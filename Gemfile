@@ -21,6 +21,7 @@ gem 'omniauth-discord'
 # gem 'omniauth-rails_csrf_protection'
 # gem 'omniauth-twitter'
 # gem 'sinatra_omniauth'
+gem 'jwt'
 
 gem 'haml'
 # Thin has pool connection issues
