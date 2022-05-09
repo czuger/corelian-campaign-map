@@ -32,6 +32,9 @@ module Sinatra
 
       app.helpers Engine::Helpers
 
+      # If required, use https://hackernoon.com/how-to-take-screenshots-in-the-browser-using-javascript-l92k3xq7
+      # To make a screenshot of the map.
+
       app.get '/map/:campaign_id' do
         authorize!
 
@@ -77,7 +80,7 @@ module Sinatra
       end
 
       app.get '/status/:campaign_id' do
-        authorize!
+        # authorize!
         @campaign = Campaign.find(params['campaign_id'])
         @side = current_player.side
 
