@@ -80,7 +80,7 @@ module Sinatra
       end
 
       app.get '/status/:campaign_id' do
-        # authorize!
+        authorize!
         @campaign = Campaign.find(params['campaign_id'])
         @side = current_player.side
 
