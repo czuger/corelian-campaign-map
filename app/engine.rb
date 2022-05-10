@@ -35,6 +35,8 @@ module Sinatra
       # If required, use https://hackernoon.com/how-to-take-screenshots-in-the-browser-using-javascript-l92k3xq7
       # To make a screenshot of the map.
 
+      # TODO : remove the diplomat bool in token if unused.
+
       app.get '/map/:campaign_id' do
         authorize!
 
